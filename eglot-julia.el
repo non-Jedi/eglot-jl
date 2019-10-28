@@ -67,7 +67,7 @@
     ,(eglot-julia/get-env (buffer-file-name))
     ,(eglot-julia/depot-path)))
 
-;; Setup eglot with julia
+;;;###autoload
 (add-to-list 'eglot-server-programs
              ;; function instead of strings to find project dir at runtime
              '(julia-mode . eglot-julia/ls-invocation))

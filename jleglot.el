@@ -17,6 +17,16 @@
 ;; copyright and related or neighboring rights to jleglot. This
 ;; work is published from: United States.
 
+
+;;; Commentary:
+
+;; This package loads support for the Julia language server into eglot
+;; and package.el. This provides IDE-like features for editing
+;; julia-mode buffers. After installing this package, to load support
+;; for the Julia language server, run jleglot-init. After that,
+;; running the eglot function in a julia-mode buffer should work
+;; properly.
+
 ;;; Code:
 
 (require 'cl-generic)

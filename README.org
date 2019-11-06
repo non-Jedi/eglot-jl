@@ -1,0 +1,14 @@
+* jleglot
+
+This is a simple package to make using [[https://github.com/julia-vscode/LanguageServer.jl][Julia's language server]] easier
+with [[https://github.com/joaotavora/eglot][eglot]]. It can be installed with the recipe:
+
+
+#+begin_src emacs-lisp
+  '(jleglot :type git :host github :repo "non-Jedi/jleglot" :files ("*.el" "*.jl" "*.toml"))
+#+end_src
+
+After installation the interactive function ~jleglot-init~ will load
+support for the Julia language server into eglot and project.el. After
+a call to ~jleglot-init~, calling ~eglot~ in a ~julia-mode~ buffer
+will correctly start the language server.

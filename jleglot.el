@@ -75,7 +75,7 @@ when the JULIA_DEPOT_PATH environment variable is not set."
 (cl-defmethod project-roots ((project (head julia)))
   (list (cdr project)))
 
-(defun jleglot--ls-invocation (interactive)
+(defun jleglot--ls-invocation (_interactive)
   `(,jleglot-julia-command
     ,(expand-file-name "jleglot.jl" jleglot-base)
     ,(jleglot--env (buffer-file-name))

@@ -62,21 +62,23 @@ when the JULIA_DEPOT_PATH environment variable is not set."
                  (locate-dominating-file dir "Project.toml"))))
     (and root (cons 'julia root))))
 
-(add-hook 'project-find-functions 'jleglot-project-try)
-
 (cl-defmethod project-roots ((project (head julia)))
   (list (cdr project)))
 
-(defun jleglot--ls-invocation ()
+(defun jleglot--ls-invocation (interactive)
   `(,jleglot-julia-command
     ,(expand-file-name "jleglot.jl" jleglot-base)
     ,(jleglot--env (buffer-file-name))
     ,(jleglot--depot-path)))
 
 ;;;###autoload
-(add-to-list 'eglot-server-programs
-             ;; function instead of strings to find project dir at runtime
-             '(julia-mode . jleglot--ls-invocation))
+(defun jleglot-init ()
+  "Load `jleglot' to use eglot with the Julia language server."
+  (interactive)
+  (add-hook 'project-find-functions 'jleglot-project-try)
+  (add-to-list 'eglot-server-programs
+               ;; function instead of strings to find project dir at runtime
+               '(julia-mode . jleglot--ls-invocation)))
 
 (provide 'jleglot)
 ;;; jleglot.el ends here

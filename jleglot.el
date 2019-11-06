@@ -21,9 +21,9 @@
 ;;; Commentary:
 
 ;; This package loads support for the Julia language server into eglot
-;; and package.el. This provides IDE-like features for editing
-;; julia-mode buffers. After installing this package, to load support
-;; for the Julia language server, run jleglot-init. After that,
+;; and package.el.  This provides IDE-like features for editing
+;; julia-mode buffers.  After installing this package, to load support
+;; for the Julia language server, run jleglot-init.  After that,
 ;; running the eglot function in a julia-mode buffer should work
 ;; properly.
 
@@ -49,25 +49,25 @@ when the JULIA_DEPOT_PATH environment variable is not set."
   :type 'string)
 
 (defcustom jleglot-default-environment "~/.julia/environment/v1.2"
-  "Path of the Julia environment used if file not in a Julia Project."
+  "Path to the Julia environment used if file not in a Julia Project."
   :type 'string)
 
 (defconst jleglot-base (file-name-directory load-file-name))
 
-(defun jleglot--depot-path ()
-  ;; LanguageServer.jl uses convention that empty string uses default julia depot
-    (if (string= jleglot-depot "")
-        jleglot-depot
-      (expand-file-name jleglot-depot)))
-
 (defun jleglot--env (dir)
+  "Find the most relevant Julia Project for a given directory.
+If a parent directory to DIR contains a file JuliaProject.toml or
+Project.toml, that parent directory is used.  If not,
+`jleglot-default-environment' is used."
   (expand-file-name (if dir (or (locate-dominating-file dir "JuliaProject.toml")
                                 (locate-dominating-file dir "Project.toml")
                                 jleglot-default-environment)
                       jleglot-default-environment)))
 
 ;; Make project.el aware of Julia projects
-(defun jleglot-project-try (dir)
+(defun jleglot--project-try (dir)
+  "Return project instance if DIR is part of a julia project.
+Otherwise returns nil"
   (let ((root (or (locate-dominating-file dir "JuliaProject.toml")
                  (locate-dominating-file dir "Project.toml"))))
     (and root (cons 'julia root))))
@@ -76,16 +76,17 @@ when the JULIA_DEPOT_PATH environment variable is not set."
   (list (cdr project)))
 
 (defun jleglot--ls-invocation (_interactive)
+  "Return list of strings to be called to start the Julia language server."
   `(,jleglot-julia-command
     ,(expand-file-name "jleglot.jl" jleglot-base)
     ,(jleglot--env (buffer-file-name))
-    ,(jleglot--depot-path)))
+    ,jleglot-depot))
 
 ;;;###autoload
 (defun jleglot-init ()
   "Load `jleglot' to use eglot with the Julia language server."
   (interactive)
-  (add-hook 'project-find-functions #'jleglot-project-try)
+  (add-hook 'project-find-functions #'jleglot--project-try)
   (add-to-list 'eglot-server-programs
                ;; function instead of strings to find project dir at runtime
                '(julia-mode . jleglot--ls-invocation)))

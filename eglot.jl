@@ -1,9 +1,7 @@
 import Pkg
 Pkg.activate(@__DIR__)
 
-using LanguageServer, Sockets, SymbolServer
+using LanguageServer
 
-server = LanguageServer.LanguageServerInstance(stdin, stdout, false,
-                                               ARGS[1], ARGS[2], Dict())
-server.runlinter = true
+server = LanguageServerInstance(stdin, stdout, false, ARGS[1], ARGS[2], Dict())
 run(server)

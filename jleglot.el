@@ -23,7 +23,7 @@
 (require 'eglot)
 (require 'project)
 
-(degroup jleglot nil
+(defgroup jleglot nil
          "Interaction with LanguageServer.jl LSP server via eglot"
          :prefix "jleglot-"
          :group 'applications)

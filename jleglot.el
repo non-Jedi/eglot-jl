@@ -85,7 +85,7 @@ when the JULIA_DEPOT_PATH environment variable is not set."
 (defun jleglot-init ()
   "Load `jleglot' to use eglot with the Julia language server."
   (interactive)
-  (add-hook 'project-find-functions 'jleglot-project-try)
+  (add-hook 'project-find-functions #'jleglot-project-try)
   (add-to-list 'eglot-server-programs
                ;; function instead of strings to find project dir at runtime
                '(julia-mode . jleglot--ls-invocation)))

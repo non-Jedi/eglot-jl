@@ -8,6 +8,7 @@ catch
     Pkg.instantiate()
     @eval using LanguageServer
 end#try
+using LanguageServer.SymbolServer
 
 server = LanguageServerInstance(stdin, stdout, false, ARGS[1], ARGS[2], Dict())
 run(server)

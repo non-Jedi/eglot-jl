@@ -34,9 +34,9 @@
 (require 'project)
 
 (defgroup eglot-jl nil
-         "Interaction with LanguageServer.jl LSP server via eglot"
-         :prefix "eglot-jl-"
-         :group 'applications)
+  "Interaction with LanguageServer.jl LSP server via eglot"
+  :prefix "eglot-jl-"
+  :group 'applications)
 
 (defcustom eglot-jl-julia-command "julia"
   "Command to run the Julia executable."
@@ -69,7 +69,7 @@ Project.toml, that parent directory is used.  If not,
   "Return project instance if DIR is part of a julia project.
 Otherwise returns nil"
   (let ((root (or (locate-dominating-file dir "JuliaProject.toml")
-                 (locate-dominating-file dir "Project.toml"))))
+                  (locate-dominating-file dir "Project.toml"))))
     (and root (cons 'julia root))))
 
 (cl-defmethod project-roots ((project (head julia)))

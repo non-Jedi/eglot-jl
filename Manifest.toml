@@ -5,9 +5,12 @@ uuid = "2a0f44e3-6c83-55bd-87e4-b1978d98bd5f"
 
 [[CSTParser]]
 deps = ["Tokenize"]
-git-tree-sha1 = "99dda94f5af21a4565dc2b97edf6a95485f116c3"
+git-tree-sha1 = "ba6c5b7893e5fc90b4ff26cc061b50f715af0449"
+pinned = true
+repo-rev = "2a470e5"
+repo-url = "https://github.com/julia-vscode/CSTParser.jl.git"
 uuid = "00ebfdb7-1f24-5e51-bd34-a7502290713f"
-version = "1.0.0"
+version = "2.0.1-DEV"
 
 [[Dates]]
 deps = ["Printf"]
@@ -18,10 +21,19 @@ deps = ["Random", "Serialization", "Sockets"]
 uuid = "8ba89e20-285c-5b6f-9357-94700520ee1b"
 
 [[DocumentFormat]]
-deps = ["CSTParser", "Tokenize"]
-git-tree-sha1 = "c3918cd8afcd51cb4e2b08f29767465fa0922e05"
+deps = ["CSTParser", "FilePathsBase", "Tokenize"]
+git-tree-sha1 = "a319f2300c1b31dee2497b0265e65b5ad7b61142"
+pinned = true
+repo-rev = "8137c72"
+repo-url = "https://github.com/julia-vscode/DocumentFormat.jl.git"
 uuid = "ffa9a821-9c82-50df-894e-fbcef3ed31cd"
-version = "1.0.1"
+version = "1.1.2-DEV"
+
+[[FilePathsBase]]
+deps = ["Dates", "LinearAlgebra", "Printf", "Test", "UUIDs"]
+git-tree-sha1 = "2cd6e2e7965934f72cb80251f760228e2264bab3"
+uuid = "48062228-2e41-5def-b9a4-89aafe57970f"
+version = "0.7.0"
 
 [[InteractiveUtils]]
 deps = ["Markdown"]
@@ -35,15 +47,22 @@ version = "0.21.0"
 
 [[LanguageServer]]
 deps = ["CSTParser", "DocumentFormat", "JSON", "REPL", "StaticLint", "SymbolServer", "Tokenize", "URIParser"]
-git-tree-sha1 = "d39d7ea0c0b075454b7b6a43d2c8cd8e85e016bb"
+git-tree-sha1 = "148c75aa5172341b613303a8000f583a2f0f3f34"
 pinned = true
-repo-rev = "f31248d"
+repo-rev = "1b8750e"
 repo-url = "https://github.com/julia-vscode/LanguageServer.jl.git"
 uuid = "2b0e0bc5-e4fd-59b4-8912-456d1b03d8d7"
-version = "0.6.1-DEV"
+version = "1.1.0-DEV"
 
 [[LibGit2]]
 uuid = "76f85450-5226-5b5a-8eaa-529ad045b433"
+
+[[Libdl]]
+uuid = "8f399da3-3557-5675-b5ff-fb832c97cbdb"
+
+[[LinearAlgebra]]
+deps = ["Libdl"]
+uuid = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
 
 [[Logging]]
 uuid = "56ddb016-857b-54e1-b83d-db4d58db5568"
@@ -57,12 +76,12 @@ uuid = "a63ad114-7e13-5084-954f-fe012c677804"
 
 [[Parsers]]
 deps = ["Dates", "Test"]
-git-tree-sha1 = "c56ecb484f286639f161e712b8311f5ab77e8d32"
+git-tree-sha1 = "0139ba59ce9bc680e2925aec5b7db79065d60556"
 uuid = "69de0a69-1ddd-5017-9359-2bf0b02dc9f0"
-version = "0.3.8"
+version = "0.3.10"
 
 [[Pkg]]
-deps = ["Dates", "LibGit2", "Markdown", "Printf", "REPL", "Random", "SHA", "UUIDs"]
+deps = ["Dates", "LibGit2", "Libdl", "Logging", "Markdown", "Printf", "REPL", "Random", "SHA", "UUIDs"]
 uuid = "44cfe95a-1eb2-52ea-b672-e2afdf69b78f"
 
 [[Printf]]
@@ -88,24 +107,30 @@ uuid = "6462fe0b-24de-5631-8697-dd941f90decc"
 
 [[StaticLint]]
 deps = ["CSTParser", "Serialization", "SymbolServer"]
-git-tree-sha1 = "5808665edf090dd53b958cd7e02c4e5319c2b5e3"
+git-tree-sha1 = "e4c3e45dcaa4c0d9627deb00d77fc3cb47b1912e"
+pinned = true
+repo-rev = "4ae43e4"
+repo-url = "https://github.com/julia-vscode/StaticLint.jl.git"
 uuid = "b3cc710f-9c33-5bdb-a03d-a94903873e97"
-version = "1.0.2"
+version = "3.0.1-DEV"
 
 [[SymbolServer]]
 deps = ["LibGit2", "Pkg", "SHA", "Serialization"]
-git-tree-sha1 = "593e6f3aa2912051478c078e8ad738c0d9f7a77a"
+git-tree-sha1 = "19358a3a6c5ca59792b7b5588c68c59af035be3a"
+pinned = true
+repo-rev = "764ed2c"
+repo-url = "https://github.com/julia-vscode/SymbolServer.jl.git"
 uuid = "cf896787-08d5-524d-9de7-132aaa0cb996"
-version = "1.0.1"
+version = "2.0.1-DEV"
 
 [[Test]]
 deps = ["Distributed", "InteractiveUtils", "Logging", "Random"]
 uuid = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 
 [[Tokenize]]
-git-tree-sha1 = "dfcdbbfb2d0370716c815cbd6f8a364efb6f42cf"
+git-tree-sha1 = "c3aab236f122445406cf7a6de8af0b794da5a950"
 uuid = "0796e94c-ce3b-5d07-9a54-7f471281c624"
-version = "0.5.6"
+version = "0.5.7"
 
 [[URIParser]]
 deps = ["Test", "Unicode"]

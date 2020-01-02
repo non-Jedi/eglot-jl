@@ -8,6 +8,7 @@
 ;; URL: https://github.com/non-Jedi/eglot-jl
 ;; Keywords: convenience, languages
 ;; Package-Requires: ((emacs "25.1") (eglot "1.4") (julia-mode "0.3"))
+;; License: CC0
 
 ;; This file is not part of GNU Emacs.
 

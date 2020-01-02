@@ -1,14 +1,38 @@
 * eglot-jl
 
 This is a simple package to make using [[https://github.com/julia-vscode/LanguageServer.jl][Julia's language server]] easier
-with [[https://github.com/joaotavora/eglot][eglot]]. It can be installed with the recipe:
-
-
-#+begin_src emacs-lisp
-  '(eglot-jl :type git :host github :repo "non-Jedi/eglot-jl" :files ("*.el" "*.jl" "*.toml"))
-#+end_src
+with [[https://github.com/joaotavora/eglot][eglot]]. It can be installed from
+[melpa](https://melpa.org/#/eglot-jl) by [[https://melpa.org/#/getting-started][adding melpa to your
+=package-archives=]] and doing =M-x package-install RET eglot-jl RET=
+with Emacs 26.1+.
 
 After installation the interactive function ~eglot-jl-init~ will load
-support for the Julia language server into eglot and project.el. After
-a call to ~eglot-jl-init~, calling ~eglot~ in a ~julia-mode~ buffer
-will correctly start the language server.
+support for the Julia language server into eglot and project.el. The
+first time this is run, it will install the Julia language server into
+your default Julia depot (e.g. =~/..julia=) in an isolated [[https://docs.julialang.org/en/v1.1/manual/code-loading/#Environments-1][project
+environment]]. This may take some time. After a call to ~eglot-jl-init~,
+calling ~eglot~ in a ~julia-mode~ buffer will correctly start the
+language server.
+
+** FAQ
+*** Why am I receiving ~Error running timer: (error "[eglot] Timed out")~ messages?
+The most likely reason is that [[https://github.com/julia-vscode/SymbolServer.jl/issues/56][SymbolServer.jl takes a very long time
+to process project dependencies]]. This is a one-time process that
+shouldn't cause issues once the dependencies are cached, however it
+can take over a minute to process each dependency. By default, eglot
+will only wait wait 30 seconds for a language server to be ready; this
+is controlled by =eglot-connect-timeout=.
+
+To work around this issue, you can:
+
+1. Set =eglot-connect-timeout= to a very high value.
+   - Progress of the SymbolServer can be monitored in the =*EGLOT
+     (ProjectName/julia-mode) stderr*= buffer.
+2. Run =julia path/to/eglot-jl/eglot-jl.jl path/to/project ""=
+
+The SymbolServer is finished with caching dependencies when it
+displays:
+
+#+begin_quote
+[ Info: store set
+#+end_quote

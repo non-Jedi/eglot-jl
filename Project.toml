@@ -1,8 +1,9 @@
 [deps]
 LanguageServer = "2b0e0bc5-e4fd-59b4-8912-456d1b03d8d7"
+Pkg = "44cfe95a-1eb2-52ea-b672-e2afdf69b78f"
 SymbolServer = "cf896787-08d5-524d-9de7-132aaa0cb996"
 
 [compat]
-julia = "1"
 LanguageServer = "2.0.1"
 SymbolServer = "3.1.1"
+julia = "1"

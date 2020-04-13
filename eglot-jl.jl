@@ -2,13 +2,12 @@
 # wrong versions of packages aren't picked up. If called with the
 # normal LOAD_PATH, due to the stacked environments, this could pick
 # up a package from "@v#.#".
-try
-    @eval using LanguageServer, SymbolServer
-catch
-    @warn "Unable to import LanguageServer. Instantiating project."
-    Pkg.instantiate()
-    @eval using LanguageServer, SymbolServer
-end#try
+import Pkg
+# In julia 1.4 this operation takes under a second. This can be
+# crushingly slow in older versions of julia though.
+Pkg.instantiate()
+
+using LanguageServer, SymbolServer
 
 server = LanguageServerInstance(stdin, stdout, false, ARGS[1], ARGS[2])
 # The run command starts additional julia processes which must have a

@@ -1,9 +1,8 @@
 * eglot-jl
 
 This is a simple package to make using [[https://github.com/julia-vscode/LanguageServer.jl][Julia's language server]] easier
-with [[https://github.com/joaotavora/eglot][eglot]]. It can be installed from
-[melpa](https://melpa.org/#/eglot-jl) by [[https://melpa.org/#/getting-started][adding melpa to your
-=package-archives=]] and doing =M-x package-install RET eglot-jl RET=
+with [[https://github.com/joaotavora/eglot][eglot]]. It can be installed from [[https://melpa.org/#/eglot-jl][melpa]] by [[https://melpa.org/#/getting-started][adding melpa to your
+~package-archives~ ]] and doing =M-x package-install RET eglot-jl RET=
 with Emacs 26.1+.
 
 After installation the interactive function ~eglot-jl-init~ will load
@@ -28,7 +27,11 @@ To work around this issue, you can:
 1. Set =eglot-connect-timeout= to a very high value.
    - Progress of the SymbolServer can be monitored in the =*EGLOT
      (ProjectName/julia-mode) stderr*= buffer.
-2. Run =julia path/to/eglot-jl/eglot-jl.jl path/to/project ""=
+2. Run the following:
+
+#+begin_src sh
+  JULIA_LOAD_PATH="@" julia --project=path/to/eglot-jl/ path/to/eglot-jl/eglot-jl.jl path/to/project ""
+#+end_src
 
 The SymbolServer is finished with caching dependencies when it
 displays:

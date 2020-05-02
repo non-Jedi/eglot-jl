@@ -42,6 +42,10 @@
   "Command to run the Julia executable."
   :type 'string)
 
+(defcustom eglot-jl-julia-flags nil
+  "Extra flags to pass to the Julia executable."
+  :type 'list)
+
 (defcustom eglot-jl-depot ""
   "Path or paths (space-separated) to Julia depots.
 An empty string uses the default depot for ‘eglot-jl-julia-command’
@@ -77,11 +81,12 @@ Otherwise returns nil"
 
 (defun eglot-jl--ls-invocation (_interactive)
   "Return list of strings to be called to start the Julia language server."
-  (list eglot-jl-julia-command
-        (concat "--project=" eglot-jl-base)
-        (expand-file-name "eglot-jl.jl" eglot-jl-base)
-        (eglot-jl--env (buffer-file-name))
-        eglot-jl-depot))
+  `(,eglot-jl-julia-command
+    ,@eglot-jl-julia-flags
+    ,(concat "--project=" eglot-jl-base)
+    ,(expand-file-name "eglot-jl.jl" eglot-jl-base)
+    ,(eglot-jl--env (buffer-file-name))
+    ,eglot-jl-depot))
 
 ;;;###autoload
 (defun eglot-jl-init ()

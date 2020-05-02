@@ -77,9 +77,6 @@ Otherwise returns nil"
 
 (defun eglot-jl--ls-invocation (_interactive)
   "Return list of strings to be called to start the Julia language server."
-  ;; The eglot-jl.jl script deletes this environment variable so that
-  ;; subsequent julia processes will use the default LOAD_PATH.
-  (setenv "JULIA_LOAD_PATH" "@")
   (list eglot-jl-julia-command
         (concat "--project=" eglot-jl-base)
         (expand-file-name "eglot-jl.jl" eglot-jl-base)

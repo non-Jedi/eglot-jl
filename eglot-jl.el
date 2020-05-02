@@ -84,12 +84,12 @@ Otherwise returns nil"
   ;; The eglot-jl.jl script deletes this environment variable so that
   ;; subsequent julia processes will use the default LOAD_PATH.
   (setenv "JULIA_LOAD_PATH" "@")
-  (append (list eglot-jl-julia-command)
-          eglot-jl-julia-flags
-          (list (concat "--project=" eglot-jl-base)
-                (expand-file-name "eglot-jl.jl" eglot-jl-base)
-                (eglot-jl--env (buffer-file-name))
-                eglot-jl-depot)))
+  `(,eglot-jl-julia-command
+    ,@eglot-jl-julia-flags
+    ,(concat "--project=" eglot-jl-base)
+    ,(expand-file-name "eglot-jl.jl" eglot-jl-base)
+    ,(eglot-jl--env (buffer-file-name))
+    ,eglot-jl-depot))
 
 ;;;###autoload
 (defun eglot-jl-init ()

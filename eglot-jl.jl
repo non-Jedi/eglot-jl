@@ -9,5 +9,5 @@ Pkg.instantiate()
 
 using LanguageServer, SymbolServer
 
-server = LanguageServerInstance(stdin, stdout, false, ARGS[1], ARGS[2])
+server = LanguageServerInstance(stdin, stdout, ARGS[1], ARGS[2])
 run(server)

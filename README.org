@@ -5,14 +5,14 @@ with [[https://github.com/joaotavora/eglot][eglot]]. It can be installed from [[
 ~package-archives~ ]] and doing =M-x package-install RET eglot-jl RET=
 with Emacs 26.1+.
 
-After installation the interactive function ~eglot-jl-init~ will load
-support for the Julia language server into eglot and project.el. The
-first time this is run, it will install the Julia language server into
-your default Julia depot (e.g. =~/..julia=) in an isolated [[https://docs.julialang.org/en/v1.1/manual/code-loading/#Environments-1][project
-environment]]. This may take some time. After a call to ~eglot-jl-init~,
-calling ~eglot~ in a ~julia-mode~ buffer will correctly start the
-language server.
-
+After installation, ~eglot-jl-init~ will load support for the Julia
+language server into eglot and project.el. If ~eglot-jl-init~ has been
+run in your emacs session, running ~eglot~ in a ~julia-mode~ buffer
+will start a language server for the [[https://docs.julialang.org/en/v1.1/manual/code-loading/#Project-environments-1][Julia project]] to which the buffer
+belongs. The first time ~eglot~ is run, the Julia language server will
+be downloaded and installed into the default depot (e.g. =~/.julia=)
+in its own isolated project environment. This may take a long time, so
+~eglot-connect-timeout~ should be increased for this first run.
 ** FAQ
 *** Why am I receiving ~Error running timer: (error "[eglot] Timed out")~ messages?
 The most likely reason is that [[https://github.com/julia-vscode/SymbolServer.jl/issues/56][SymbolServer.jl takes a very long time

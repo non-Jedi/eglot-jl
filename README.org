@@ -13,6 +13,36 @@ belongs. The first time ~eglot~ is run, the Julia language server will
 be downloaded and installed into the default depot (e.g. =~/.julia=)
 in its own isolated project environment. This may take a long time, so
 ~eglot-connect-timeout~ should be increased for this first run.
+
+** Capabilities
+Completion:
+
+[[./images/completion.gif]]
+
+Show help and signatures in the minibuffer:
+
+[[./images/minibuffer_help.gif]]
+
+Show docstring for symbol at point (~eglot-help-at-point~):
+
+[[./images/eglot-help-at-point.gif]]
+
+Jump to definitions of symbol at point (~xref-find-definitions~):
+
+[[./images/xref-find-definitions.gif]]
+
+Rename symbol at point (~eglot-rename~):
+
+[[./images/eglot-rename.gif]]
+
+Linting:
+
+[[./images/lint.gif]]
+
+Jump to symbol in document ~imenu~:
+
+[[./images/imenu.gif]]
+
 ** FAQ
 *** Why am I receiving ~Error running timer: (error "[eglot] Timed out")~ messages?
 The most likely reason is that [[https://github.com/julia-vscode/SymbolServer.jl/issues/56][SymbolServer.jl takes a very long time

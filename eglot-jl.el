@@ -51,22 +51,7 @@
 An empty string uses the default depot for ‘eglot-jl-julia-command’
 when the JULIA_DEPOT_PATH environment variable is not set."
   :type 'string)
-
-(defcustom eglot-jl-default-environment "~/.julia/environment/v1.2"
-  "Path to the Julia environment used if file not in a Julia Project."
-  :type 'string)
-
 (defconst eglot-jl-base (file-name-directory load-file-name))
-
-(defun eglot-jl--env (dir)
-  "Find the most relevant Julia Project for a given directory.
-If a parent directory to DIR contains a file JuliaProject.toml or
-Project.toml, that parent directory is used.  If not,
-`eglot-jl-default-environment' is used."
-  (expand-file-name (if dir (or (locate-dominating-file dir "JuliaProject.toml")
-                                (locate-dominating-file dir "Project.toml")
-                                eglot-jl-default-environment)
-                      eglot-jl-default-environment)))
 
 ;; Make project.el aware of Julia projects
 (defun eglot-jl--project-try (dir)
@@ -83,9 +68,8 @@ Otherwise returns nil"
   "Return list of strings to be called to start the Julia language server."
   `(,eglot-jl-julia-command
     ,@eglot-jl-julia-flags
-    ,(concat "--project=" eglot-jl-base)
+    "--project"
     ,(expand-file-name "eglot-jl.jl" eglot-jl-base)
-    ,(eglot-jl--env (buffer-file-name))
     ,eglot-jl-depot))
 
 ;;;###autoload

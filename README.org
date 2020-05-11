@@ -30,12 +30,12 @@ To work around this issue, you can:
 2. Run the following:
 
 #+begin_src sh
-  JULIA_LOAD_PATH="@" julia --project=path/to/eglot-jl/ path/to/eglot-jl/eglot-jl.jl path/to/project ""
+  julia --project path/to/eglot-jl/eglot-jl.jl
 #+end_src
 
 The SymbolServer is finished with caching dependencies when it
 displays:
 
 #+begin_quote
-[ Info: store set
+[ Info: Received new data from Julia Symbol Server.
 #+end_quote

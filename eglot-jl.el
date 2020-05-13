@@ -2,7 +2,7 @@
 
 ;; Copyright (C) 2019 Adam Beckmeyer
 
-;; Version: 1.2.0
+;; Version: 2.0.0
 ;; Author: Adam Beckmeyer <adam_git@thebeckmeyers.xyz>
 ;; Maintainer: Adam Beckmeyer <adam_git@thebeckmeyers.xyz>
 ;; URL: https://github.com/non-Jedi/eglot-jl
@@ -51,6 +51,7 @@
 An empty string uses the default depot for ‘eglot-jl-julia-command’
 when the JULIA_DEPOT_PATH environment variable is not set."
   :type 'string)
+
 (defconst eglot-jl-base (file-name-directory load-file-name))
 
 ;; Make project.el aware of Julia projects
@@ -68,8 +69,9 @@ Otherwise returns nil"
   "Return list of strings to be called to start the Julia language server."
   `(,eglot-jl-julia-command
     ,@eglot-jl-julia-flags
-    "--project"
+    ,(concat "--project=" eglot-jl-base)
     ,(expand-file-name "eglot-jl.jl" eglot-jl-base)
+    ,(file-name-directory (buffer-file-name))
     ,eglot-jl-depot))
 
 ;;;###autoload

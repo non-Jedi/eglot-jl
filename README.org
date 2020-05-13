@@ -27,10 +27,10 @@ To work around this issue, you can:
 1. Set =eglot-connect-timeout= to a very high value.
    - Progress of the SymbolServer can be monitored in the =*EGLOT
      (ProjectName/julia-mode) stderr*= buffer.
-2. Run the following:
+2. Run the following, from your project directory:
 
 #+begin_src sh
-  julia --project path/to/eglot-jl/eglot-jl.jl
+  julia --project=path/to/eglot-jl/ path/to/eglot-jl/eglot-jl.jl
 #+end_src
 
 The SymbolServer is finished with caching dependencies when it

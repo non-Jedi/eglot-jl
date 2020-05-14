@@ -69,3 +69,41 @@ displays:
 #+begin_quote
 [ Info: Received new data from Julia Symbol Server.
 #+end_quote
+
+
+*** Can I speed-up server start-up times?
+
+By default, starting a new language server (which is done once per project)
+takes some time: around 20 seconds are needed before the server is ready, which
+manifests itself by the =[eglot:projectName]= indicator showing up in the
+modeline.
+
+The =compile.jl= script that ships with =eglot-jl= allows compiling a system
+image, which can greatly speed-up language server start-up times:
+
+#+begin_src sh
+  julia path/to/eglot-jl/compile.jl
+#+end_src
+
+This will take a few minutes to generate a system image in
+=path/to/eglot-jl/eglot-jl.X.Y.Z.so= (where =X.Y.Z= is your julia version number,
+and the file extension is adapted to your system: =.dylib= for MacOS, =.dll= for
+Windows).
+
+You can then instruct =eglot-jl= to use this system image by adding the
+following to your Emacs configuration:
+
+#+begin_src emacs-lisp
+  (setq eglot-jl-julia-flags '("--sysimage=/path/to/eglot-jl/eglot-jl.X.Y.Z.so"))
+#+end_src
+
+This should reduce language server startup times to less than 2 seconds.
+
+Be aware that you should update this system image (by running =compile.jl=
+again) when julia changes, or if you update =eglot-jl= itself. If anything goes
+wrong with this system image, you can always reset your julia flags to stop
+using it:
+
+#+begin_src emacs-lisp
+  (setq eglot-jl-julia-flags nil)
+#+end_src

@@ -44,8 +44,21 @@ project_path = something(Base.current_project(src_path), Base.load_path_expand(L
 empty!(LOAD_PATH)
 push!(LOAD_PATH, "@")
 
+using LanguageServer.JSON
+if get(ENV, "EGLOT_JL_TEST", "0") == "1"
+    msg = Dict("jsonrpc" => "2.0",
+               "id"      => 1,
+               "method"  => "exit",
+               "params"  => Dict()) |> JSON.json
+    input = IOBuffer("Content-Length: $(length(msg))\n\n$msg")
+    mode = "TEST"
+else
+    mode = "RUN"
+    input = stdin
+end
+
 using LanguageServer, SymbolServer
 
-@info "Running language server" env=Base.load_path()[1] src_path project_path depot_path
-server = LanguageServerInstance(stdin, stdout, project_path, depot_path)
+@info "Running language server" mode env=Base.load_path()[1] src_path project_path depot_path
+server = LanguageServerInstance(input, stdout, project_path, depot_path)
 run(server)

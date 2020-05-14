@@ -44,7 +44,7 @@
 
 (defcustom eglot-jl-julia-flags nil
   "Extra flags to pass to the Julia executable."
-  :type 'list)
+  :type '(repeat string))
 
 (defcustom eglot-jl-depot ""
   "Path or paths (space-separated) to Julia depots.
@@ -68,8 +68,9 @@ Otherwise returns nil"
 (defun eglot-jl--ls-invocation (_interactive)
   "Return list of strings to be called to start the Julia language server."
   `(,eglot-jl-julia-command
-    ,@eglot-jl-julia-flags
+    "--startup-file=no"
     ,(concat "--project=" eglot-jl-base)
+    ,@eglot-jl-julia-flags
     ,(expand-file-name "eglot-jl.jl" eglot-jl-base)
     ,(file-name-directory (buffer-file-name))
     ,eglot-jl-depot))

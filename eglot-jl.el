@@ -60,6 +60,11 @@ The project should have LanguageServer and SymbolServer packages
 available."
   :type 'string)
 
+(defcustom eglot-jl-enable-sysimage t
+  "If t, use a system image if a suitable one is
+found. Otherwise, don't even look for a system image."
+  :type 'boolean)
+
 ;; Make project.el aware of Julia projects
 (defun eglot-jl--project-try (dir)
   "Return project instance if DIR is part of a julia project.
@@ -71,10 +76,31 @@ Otherwise returns nil"
 (cl-defmethod project-roots ((project (head julia)))
   (list (cdr project)))
 
+(defun eglot-jl--sysimage-args ()
+  "Returns a list of command-line switches suitable for sysimage loading.
+Return nil if no system image has been found or if system images
+have been disabled altogether."
+  (when eglot-jl-enable-sysimage
+    (let ((julia-version (with-temp-buffer
+                           (call-process eglot-jl-julia-command nil t nil
+                                         "-e" "print(Base.VERSION)")
+                           (buffer-string))))
+      (car
+       (remove nil
+               (mapcar
+                (lambda (ext)
+                  (let ((path (expand-file-name
+                               (concat "eglot-jl." julia-version ext)
+                               eglot-jl-base)))
+                    (when (file-exists-p path)
+                      (list "--sysimage" path))))
+                '(".dll" ".dylib" ".so")))))))
+
 (defun eglot-jl--ls-invocation (_interactive)
   "Return list of strings to be called to start the Julia language server."
   `(,eglot-jl-julia-command
     "--startup-file=no"
+    ,@(eglot-jl--sysimage-args)
     ,(concat "--project=" eglot-jl-language-server-project)
     ,@eglot-jl-julia-flags
     ,(expand-file-name "eglot-jl.jl" eglot-jl-base)
@@ -89,6 +115,21 @@ Otherwise returns nil"
   (add-to-list 'eglot-server-programs
                ;; function instead of strings to find project dir at runtime
                '(julia-mode . eglot-jl--ls-invocation)))
+
+;;;###autoload
+(defun eglot-jl-compile-sysimage ()
+  "Create a compiled system image for the language server.
+This reduces subsequent start-up times."
+  (interactive)
+  (let ((buffer (get-buffer-create "*eglot-jl sysimage compilation*")))
+    (with-current-buffer buffer
+      (setq buffer-read-only nil) (erase-buffer) (setq buffer-read-only t)
+      (start-process "eglot-jl-compile-sysimage" (current-buffer)
+                     eglot-jl-julia-command
+                     "--startup-file=no" "--color=no" "--quiet"
+                     (concat "--project=" eglot-jl-base)
+                     (expand-file-name "compile.jl" eglot-jl-base)))
+    (display-buffer buffer)))
 
 (provide 'eglot-jl)
 ;;; eglot-jl.el ends here

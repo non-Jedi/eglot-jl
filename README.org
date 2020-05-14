@@ -78,32 +78,19 @@ takes some time: around 20 seconds are needed before the server is ready, which
 manifests itself by the =[eglot:projectName]= indicator showing up in the
 modeline.
 
-The =compile.jl= script that ships with =eglot-jl= allows compiling a system
-image, which can greatly speed-up language server start-up times:
+As an additional step after installation, =eglot-jl= can compile a custom julia
+system image, which can greatly speed-up language server start-up times: simply
+run =M-x eglot-jl-compile-sysimage=.
 
-#+begin_src sh
-  julia path/to/eglot-jl/compile.jl
-#+end_src
+This will take a few minutes to generate a system image, which =eglot-jl= will
+detect and automatically use for subsequent language server runs. This should
+reduce language server startup times to 1 or 2 seconds.
 
-This will take a few minutes to generate a system image in
-=path/to/eglot-jl/eglot-jl.X.Y.Z.so= (where =X.Y.Z= is your julia version number,
-and the file extension is adapted to your system: =.dylib= for MacOS, =.dll= for
-Windows).
+Be aware that each system image is specific to a version of julia. If you switch
+to a version for which you haven't (yet) generated a system image, =eglot-jl=
+won't find any suitable sysimage, and language server startup times will be high
+again. In such situations, you can simply generate a new system image for the
+new julia version by running =M-x eglot-jl-compile-sysimage= again.
 
-You can then instruct =eglot-jl= to use this system image by adding the
-following to your Emacs configuration:
-
-#+begin_src emacs-lisp
-  (setq eglot-jl-julia-flags '("--sysimage=/path/to/eglot-jl/eglot-jl.X.Y.Z.so"))
-#+end_src
-
-This should reduce language server startup times to less than 2 seconds.
-
-Be aware that you should update this system image (by running =compile.jl=
-again) when julia changes, or if you update =eglot-jl= itself. If anything goes
-wrong with this system image, you can always reset your julia flags to stop
-using it:
-
-#+begin_src emacs-lisp
-  (setq eglot-jl-julia-flags nil)
-#+end_src
+If anything goes wrong with system images, you can deactivate this feature
+altogether by customizing =eglot-jl-enable-sysimage=.

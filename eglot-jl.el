@@ -33,6 +33,8 @@
 (require 'eglot)
 (require 'project)
 
+(defconst eglot-jl-base (file-name-directory load-file-name))
+
 (defgroup eglot-jl nil
   "Interaction with LanguageServer.jl LSP server via eglot"
   :prefix "eglot-jl-"
@@ -52,7 +54,11 @@ An empty string uses the default depot for ‘eglot-jl-julia-command’
 when the JULIA_DEPOT_PATH environment variable is not set."
   :type 'string)
 
-(defconst eglot-jl-base (file-name-directory load-file-name))
+(defcustom eglot-jl-language-server-project eglot-jl-base
+  "Julia project to run language server from.
+The project should have LanguageServer and SymbolServer packages
+available."
+  :type 'string)
 
 ;; Make project.el aware of Julia projects
 (defun eglot-jl--project-try (dir)
@@ -69,7 +75,7 @@ Otherwise returns nil"
   "Return list of strings to be called to start the Julia language server."
   `(,eglot-jl-julia-command
     "--startup-file=no"
-    ,(concat "--project=" eglot-jl-base)
+    ,(concat "--project=" eglot-jl-language-server-project)
     ,@eglot-jl-julia-flags
     ,(expand-file-name "eglot-jl.jl" eglot-jl-base)
     ,(file-name-directory (buffer-file-name))

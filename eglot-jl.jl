@@ -1,6 +1,14 @@
 # Usage:
 #   julia --project=path/to/eglot-jl path/to/eglot-jl/eglot-jl.jl [SOURCE_PATH] [DEPOT_PATH]
 
+# For convenience, Pkg isn't included in eglot-jl
+# Project.toml. Importing Pkg here relies on the standard library
+# being available on LOAD_PATH
+import Pkg
+# In julia 1.4 this operation takes under a second. This can be
+# crushingly slow in older versions of julia though.
+Pkg.instantiate()
+
 # Get the source path. In order of increasing priority:
 # - default value:  pwd()
 # - command-line:   ARGS[1]
@@ -21,11 +29,6 @@ project_path = something(Base.current_project(src_path), Base.load_path_expand(L
 # Make sure that we only load packages from this environment specifically.
 empty!(LOAD_PATH)
 push!(LOAD_PATH, "@")
-
-import Pkg
-# In julia 1.4 this operation takes under a second. This can be
-# crushingly slow in older versions of julia though.
-Pkg.instantiate()
 
 using LanguageServer, SymbolServer
 

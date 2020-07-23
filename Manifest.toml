@@ -5,9 +5,9 @@ uuid = "2a0f44e3-6c83-55bd-87e4-b1978d98bd5f"
 
 [[CSTParser]]
 deps = ["Tokenize"]
-git-tree-sha1 = "a2f9009a81b92d078a682d4a8576adc1f8176e90"
+git-tree-sha1 = "60e9121d9ea044c30a04397e59b00c5d9eb826ee"
 uuid = "00ebfdb7-1f24-5e51-bd34-a7502290713f"
-version = "2.3.0"
+version = "2.5.0"
 
 [[Dates]]
 deps = ["Printf"]
@@ -19,15 +19,15 @@ uuid = "8ba89e20-285c-5b6f-9357-94700520ee1b"
 
 [[DocumentFormat]]
 deps = ["CSTParser", "FilePathsBase", "Tokenize"]
-git-tree-sha1 = "eb34aa08aad1bc1ed5641b8c1f7fa4f478a4045f"
+git-tree-sha1 = "55f22efc51e0935da95d905a96bb8d170294362e"
 uuid = "ffa9a821-9c82-50df-894e-fbcef3ed31cd"
-version = "2.2.0"
+version = "3.2.0"
 
 [[FilePathsBase]]
-deps = ["Dates", "Printf", "Test", "UUIDs"]
-git-tree-sha1 = "7bb4a1867b009b15460ffc0bcce262d13d1e415e"
+deps = ["Dates", "Mmap", "Printf", "Test", "UUIDs"]
+git-tree-sha1 = "430f22b2fc3363296cf1af2dbbe6c8b96402a969"
 uuid = "48062228-2e41-5def-b9a4-89aafe57970f"
-version = "0.9.2"
+version = "0.9.4"
 
 [[InteractiveUtils]]
 deps = ["Markdown"]
@@ -39,11 +39,17 @@ git-tree-sha1 = "b34d7cef7b337321e97d22242c3c2b91f476748e"
 uuid = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
 version = "0.21.0"
 
+[[JSONRPC]]
+deps = ["JSON", "UUIDs"]
+git-tree-sha1 = "c74b1e7bb24f82be80d27fdc2def9d449a2bce9c"
+uuid = "b9b8584e-8fd3-41f9-ad0c-7255d428e418"
+version = "1.2.0"
+
 [[LanguageServer]]
-deps = ["CSTParser", "DocumentFormat", "JSON", "REPL", "StaticLint", "SymbolServer", "Tokenize", "URIParser", "UUIDs"]
-git-tree-sha1 = "7b427da55cec8c4690190e336139dee8a808016b"
+deps = ["CSTParser", "DocumentFormat", "JSON", "JSONRPC", "Markdown", "REPL", "StaticLint", "SymbolServer", "Tokenize", "URIParser", "UUIDs"]
+git-tree-sha1 = "e0729afde30d552924b8593d9a6db4478b765d28"
 uuid = "2b0e0bc5-e4fd-59b4-8912-456d1b03d8d7"
-version = "3.0.0"
+version = "3.2.0"
 
 [[LibGit2]]
 deps = ["Printf"]
@@ -64,9 +70,9 @@ uuid = "a63ad114-7e13-5084-954f-fe012c677804"
 
 [[Parsers]]
 deps = ["Dates", "Test"]
-git-tree-sha1 = "72c3451932513427caffbd8bab15643ad693804b"
+git-tree-sha1 = "10134f2ee0b1978ae7752c41306e131a684e1f06"
 uuid = "69de0a69-1ddd-5017-9359-2bf0b02dc9f0"
-version = "1.0.3"
+version = "1.0.7"
 
 [[Pkg]]
 deps = ["Dates", "LibGit2", "Libdl", "Logging", "Markdown", "Printf", "REPL", "Random", "SHA", "UUIDs"]
@@ -95,15 +101,15 @@ uuid = "6462fe0b-24de-5631-8697-dd941f90decc"
 
 [[StaticLint]]
 deps = ["CSTParser", "Serialization", "SymbolServer"]
-git-tree-sha1 = "91efea7df8e15c588d2557a151ac3c6e1560069d"
+git-tree-sha1 = "de08beced06a13aabeb96097a974b7da0b976643"
 uuid = "b3cc710f-9c33-5bdb-a03d-a94903873e97"
-version = "4.3.0"
+version = "4.5.0"
 
 [[SymbolServer]]
 deps = ["LibGit2", "Markdown", "Pkg", "REPL", "SHA", "Serialization", "Sockets", "UUIDs"]
-git-tree-sha1 = "43383798f7c4e78abc16eb741ee4656a4940bb38"
+git-tree-sha1 = "6c5e35107328276fcfc6f22264d6c53b34562723"
 uuid = "cf896787-08d5-524d-9de7-132aaa0cb996"
-version = "4.4.0"
+version = "5.1.0"
 
 [[Test]]
 deps = ["Distributed", "InteractiveUtils", "Logging", "Random"]

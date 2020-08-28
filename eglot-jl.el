@@ -92,7 +92,7 @@ of system images has not been enabled altogether."
                               "--compile=min" "--optimize=0"
                               "--startup-file=no" "--color=no"
                               "--load" (expand-file-name "sysimage-path.jl" eglot-jl-base)
-                              "--eval" "print(sysimage_path())")
+                              "--eval" "print(sysimage_path(ARGS[1]))" eglot-jl-language-server-project)
                 (buffer-string))))
          (when (file-exists-p sysimage-path)
            (list "--sysimage" sysimage-path)))))
@@ -130,12 +130,14 @@ subsequent start-up times."
   (interactive)
   (let ((buffer (get-buffer-create "*eglot-jl sysimage compilation*")))
     (with-current-buffer buffer
-      (setq buffer-read-only nil) (erase-buffer) (setq buffer-read-only t)
+      (view-mode)
+      (let ((inhibit-read-only t))
+        (erase-buffer))
       (start-process "eglot-jl-compile-sysimage" (current-buffer)
                      eglot-jl-julia-command
-                     (eglot-jl--julia-project-args)
                      "--startup-file=no" "--color=no" "--quiet"
-                     (expand-file-name "compile.jl" eglot-jl-base)))
+                     (expand-file-name "compile.jl" eglot-jl-base)
+                     eglot-jl-language-server-project))
     (display-buffer buffer)))
 
 (provide 'eglot-jl)

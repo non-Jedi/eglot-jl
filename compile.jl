@@ -1,12 +1,17 @@
 # Usage:
-#   julia path/to/eglot-jl/compile.jl
+#   julia path/to/eglot-jl/compile.jl [LANGUAGESERVER_PROJECT_DIR]
+
+# Path to the LanguageServer project. In order of increasing priority:
+# - path to eglot-jl: @__DIR__
+# - command-line:     ARGS[1]
+dir = length(ARGS) >= 1 ? ARGS[1] : @__DIR__
 
 using Pkg
-Pkg.activate(@__DIR__)
-cd(@__DIR__)
+Pkg.activate(dir)
 
+# Get a suitable system image name
 include("sysimage-path.jl")
-sysimage = sysimage_path()
+sysimage = sysimage_path(dir)
 
 # This tells `eglot-jl.jl` to switch to TEST mode, in which the server
 # immediately reads an `exit` command after having started

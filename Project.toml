@@ -1,6 +1,7 @@
 [deps]
 LanguageServer = "2b0e0bc5-e4fd-59b4-8912-456d1b03d8d7"
 PackageCompiler = "9b87118b-4619-50d2-8e1e-99f35a4d4d9d"
+SHA = "ea8e919c-243c-51af-8825-aaa63cd721ce"
 SymbolServer = "cf896787-08d5-524d-9de7-132aaa0cb996"
 
 [compat]

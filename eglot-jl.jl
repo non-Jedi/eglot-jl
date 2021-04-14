@@ -5,6 +5,20 @@
 # Project.toml. Importing Pkg here relies on the standard library
 # being available on LOAD_PATH
 import Pkg
+
+# Resolving the environment is necessary for cases where the shipped
+# Manifest.toml is not compatible with the Julia version.
+for _ in 1:2
+    try
+        Pkg.resolve(io=stderr)
+        @info "Environment successfully resolved"
+        break
+    catch err
+        # Downgrading from 1.6 to 1.5 sometimes causes temporary errors
+        @warn "Error while resolving the environment; retrying..." err
+    end
+end
+
 # In julia 1.4 this operation takes under a second. This can be
 # crushingly slow in older versions of julia though.
 Pkg.instantiate()

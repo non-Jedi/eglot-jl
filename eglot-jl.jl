@@ -6,22 +6,12 @@
 # being available on LOAD_PATH
 import Pkg
 
-# Resolving the environment is necessary for cases where the shipped
-# Manifest.toml is not compatible with the Julia version.
-for _ in 1:2
-    try
-        Pkg.resolve(io=stderr)
-        @info "Environment successfully resolved"
-        break
-    catch err
-        # Downgrading from 1.6 to 1.5 sometimes causes temporary errors
-        @warn "Error while resolving the environment; retrying..." err
-    end
+include("utils.jl")
+if Base.JLOptions().image_file_specified == 1
+    @info "Using custom sysimage" path=unsafe_string(Base.JLOptions().image_file)
+else
+    pkg_resolve()
 end
-
-# In julia 1.4 this operation takes under a second. This can be
-# crushingly slow in older versions of julia though.
-Pkg.instantiate()
 
 # Get the source path. In order of increasing priority:
 # - default value:  pwd()

@@ -8,9 +8,10 @@ dir = length(ARGS) >= 1 ? ARGS[1] : @__DIR__
 
 using Pkg
 Pkg.activate(dir)
+include("utils.jl")
+pkg_resolve()
 
 # Get a suitable system image name
-include("sysimage-path.jl")
 sysimage = sysimage_path(dir)
 
 # This tells `eglot-jl.jl` to switch to TEST mode, in which the server

@@ -2,7 +2,7 @@
 
 ;; Copyright (C) 2019 Adam Beckmeyer
 
-;; Version: 2.1.1
+;; Version: 2.2.0
 ;; Author: Adam Beckmeyer <adam_git@thebeckmeyers.xyz>
 ;; Maintainer: Adam Beckmeyer <adam_git@thebeckmeyers.xyz>
 ;; URL: https://github.com/non-Jedi/eglot-jl
@@ -86,16 +86,18 @@ of system images has not been enabled altogether."
   (and
    eglot-jl-enable-sysimage
    (let ((sysimage-path
-              (with-temp-buffer
-                (call-process eglot-jl-julia-command nil t nil
-                              (eglot-jl--julia-project-args)
-                              "--compile=min" "--optimize=0"
-                              "--startup-file=no" "--color=no"
-                              "--load" (expand-file-name "sysimage-path.jl" eglot-jl-base)
-                              "--eval" "print(sysimage_path(ARGS[1]))" eglot-jl-language-server-project)
-                (buffer-string))))
-         (when (file-exists-p sysimage-path)
-           (list "--sysimage" sysimage-path)))))
+          (with-temp-buffer
+            (call-process eglot-jl-julia-command nil t nil
+                          (eglot-jl--julia-project-args)
+                          "--compile=min" "--optimize=0"
+                          "--startup-file=no" "--color=no"
+                          (expand-file-name "utils.jl" eglot-jl-base)
+                          eglot-jl-language-server-project)
+            ;; Get the last output line
+            (goto-char (point-max))
+            (buffer-substring-no-properties (line-beginning-position) (point)))))
+     (when (file-exists-p sysimage-path)
+       (list "--sysimage" sysimage-path)))))
 
 (defun eglot-jl--ls-invocation (_interactive)
   "Return list of strings to be called to start the Julia language server."
@@ -119,6 +121,7 @@ of system images has not been enabled altogether."
   (when (and
          eglot-jl-enable-sysimage
          (not (eglot-jl--julia-sysimage-args))
+         (not (bound-and-true-p eglot-jl--compiling-sysimage))
          (y-or-n-p "No suitable system image found for the Julia language server. Would you like to start compiling one now? "))
     (eglot-jl-compile-sysimage)))
 
@@ -128,6 +131,7 @@ of system images has not been enabled altogether."
 In combination with `eglot-jl-enable-sysimage`, this reduces
 subsequent start-up times."
   (interactive)
+  (setq eglot-jl--compiling-sysimage t)
   (let ((buffer (get-buffer-create "*eglot-jl sysimage compilation*")))
     (with-current-buffer buffer
       (view-mode)

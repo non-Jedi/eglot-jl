@@ -69,3 +69,31 @@ displays:
 #+begin_quote
 [ Info: Received new data from Julia Symbol Server.
 #+end_quote
+
+
+*** Can I speed-up server start-up times?
+
+By default, starting a new language server (which is done once per project)
+takes some time: around 20 seconds are needed before the server is ready, which
+manifests itself by the =[eglot:projectName]= indicator showing up in the
+modeline.
+
+A custom system image, created using [[https://github.com/JuliaLang/PackageCompiler.jl][=PackageCompiler.jl=]], can be used to reduce
+this latency. The whole process of creating and using a system image can be
+automated by setting the =eglot-jl-enable-sysimage= customization option in
+Emacs:
+#+begin_src elisp
+  (setq eglot-jl-enable-sysimage t)
+#+end_src
+
+When this setting is activated, you'll be prompted to start building a system
+image the first time =eglot-jl= is initialized. You'll also be prompted to
+re-build the sysimage each time this is necessary: when the Julia version
+changes, or when eglot-jl itself gets updated.
+
+It will take a few minutes to generate a system image, which =eglot-jl= will
+detect and automatically use for subsequent language server runs. This should
+reduce language server startup times to 1 or 2 seconds.
+
+If anything goes wrong with system images, you can deactivate this feature
+altogether by restoring =eglot-jl-enable-sysimage= back to its default value.

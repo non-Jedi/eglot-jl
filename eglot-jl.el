@@ -7,7 +7,7 @@
 ;; Maintainer: Adam Beckmeyer <adam_git@thebeckmeyers.xyz>
 ;; URL: https://github.com/non-Jedi/eglot-jl
 ;; Keywords: convenience, languages
-;; Package-Requires: ((emacs "25.1") (eglot "1.4") (julia-mode "0.3"))
+;; Package-Requires: ((emacs "25.1") (eglot "1.4") (project "0.8.1") (cl-generic "1.0"))
 ;; License: CC0
 
 ;; This file is not part of GNU Emacs.

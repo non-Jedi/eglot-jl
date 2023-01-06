@@ -68,8 +68,8 @@ Otherwise returns nil"
                   (locate-dominating-file dir "Project.toml"))))
     (and root (cons 'julia root))))
 
-(cl-defmethod project-roots ((project (head julia)))
-  (list (cdr project)))
+(cl-defmethod project-root ((project (head julia)))
+  (cdr project))
 
 (defun eglot-jl--ls-invocation (_interactive)
   "Return list of strings to be called to start the Julia language server."

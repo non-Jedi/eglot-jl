@@ -82,10 +82,10 @@ julia> Pkg.update()
 #+end_src
 
 This will update the dependencies of the server to latest compatible version.
-Note that that LanguageServer.jl itself won't be automatically updated if its
-major version has increased, as major versions are explicitly specified in
-the [compat] section of Project.toml. Depending on what breaking changes a new
-major version of LanguageServer.jl includes, altering the code in eglot-jl may be
+Note that LanguageServer.jl itself won't be automatically updated if its major
+version has increased, as major versions are explicitly specified in the
+[compat] section of Project.toml. Depending on what breaking changes a new major
+version of LanguageServer.jl includes, altering the code in eglot-jl may be
 necessary before we can safely add a new major version as being compatible in
 our Project.toml.
 

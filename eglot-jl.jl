@@ -33,7 +33,7 @@ src_path = length(ARGS) >= 1 ? ARGS[1] : pwd()
 # - environment:    ENV["JULIA_DEPOT_PATH"]
 # - command-line:   ARGS[2]
 depot_path = get(ENV, "JULIA_DEPOT_PATH", "")
-if length(ARGS) >= 2
+if length(ARGS) >= 2 && ARGS[2] != ""
     depot_path = ARGS[2]
 end
 

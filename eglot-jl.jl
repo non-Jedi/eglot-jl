@@ -10,7 +10,7 @@ import Pkg
 # Manifest.toml is not compatible with the Julia version.
 for _ in 1:2
     try
-        Pkg.instantiate(verbose=true, io=stderr)
+        Pkg.resolve(io=stderr)
         @info "Environment successfully resolved"
         break
     catch err

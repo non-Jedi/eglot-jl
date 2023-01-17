@@ -36,7 +36,7 @@
 (defconst eglot-jl-base (file-name-directory load-file-name))
 
 (defgroup eglot-jl nil
-  "Interaction with LanguageServer.jl LSP server via eglot"
+  "Interaction with LanguageServer.jl LSP server via eglot."
   :prefix "eglot-jl-"
   :group 'applications)
 

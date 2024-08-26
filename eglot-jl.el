@@ -88,7 +88,10 @@ Otherwise returns nil"
   (add-hook 'project-find-functions #'eglot-jl--project-try)
   (add-to-list 'eglot-server-programs
                ;; function instead of strings to find project dir at runtime
-               '((ess-julia-mode julia-mode julia-ts-mode) . eglot-jl--ls-invocation)))
+               '(((ess-julia-mode :language-id "julia")
+                  (julia-mode :language-id "julia")
+                  (julia-ts-mode :language-id "julia"))
+                  . eglot-jl--ls-invocation)))
 
 (provide 'eglot-jl)
 ;;; eglot-jl.el ends here

@@ -1,6 +1,6 @@
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.10.2"
+julia_version = "1.10.5"
 manifest_format = "2.0"
 project_hash = "697fe7aef15eb51d99a6890b570c6b02674ab66d"
 
@@ -16,9 +16,9 @@ uuid = "2a0f44e3-6c83-55bd-87e4-b1978d98bd5f"
 
 [[deps.CSTParser]]
 deps = ["Tokenize"]
-git-tree-sha1 = "b544d62417a99d091c569b95109bc9d8c223e9e3"
+git-tree-sha1 = "0157e592151e39fa570645e2b2debcdfb8a0f112"
 uuid = "00ebfdb7-1f24-5e51-bd34-a7502290713f"
-version = "3.4.2"
+version = "3.4.3"
 
 [[deps.CommonMark]]
 deps = ["Crayons", "JSON", "PrecompileTools", "URIs"]
@@ -28,9 +28,9 @@ version = "0.8.12"
 
 [[deps.Compat]]
 deps = ["TOML", "UUIDs"]
-git-tree-sha1 = "c955881e3c981181362ae4088b35995446298b80"
+git-tree-sha1 = "8ae8d32e09f0dcf42a36b90d4e17f5dd2e4c4215"
 uuid = "34da2185-b29b-5c13-b0c7-acf172513d20"
-version = "4.14.0"
+version = "4.16.0"
 
     [deps.Compat.extensions]
     CompatLinearAlgebraExt = "LinearAlgebra"
@@ -46,9 +46,9 @@ version = "4.1.1"
 
 [[deps.DataStructures]]
 deps = ["Compat", "InteractiveUtils", "OrderedCollections"]
-git-tree-sha1 = "0f4b5d62a88d8f59003e43c25a8a90de9eb76317"
+git-tree-sha1 = "1d0a14036acb104d9e89698bd408f63ab58cdc82"
 uuid = "864edb3b-99cc-5e75-8d2d-829cb0a9cfe8"
-version = "0.18.18"
+version = "0.18.20"
 
 [[deps.Dates]]
 deps = ["Printf"]
@@ -79,15 +79,15 @@ version = "0.21.4"
 
 [[deps.JSONRPC]]
 deps = ["JSON", "UUIDs"]
-git-tree-sha1 = "2756e5ffc7d46857e310a461aa366bbf7bbb673a"
+git-tree-sha1 = "054dfc36c96a47b7bbd2311c8d7b55f765a64aa7"
 uuid = "b9b8584e-8fd3-41f9-ad0c-7255d428e418"
-version = "1.3.6"
+version = "1.4.1"
 
 [[deps.JuliaFormatter]]
-deps = ["CSTParser", "CommonMark", "DataStructures", "Glob", "Pkg", "PrecompileTools", "Tokenize"]
-git-tree-sha1 = "e07d6fd7db543b11cd90ed764efec53f39851f09"
+deps = ["CSTParser", "CommonMark", "DataStructures", "Glob", "PrecompileTools", "TOML", "Tokenize"]
+git-tree-sha1 = "bb4696471330275adfd6c78c6173f276e8c067aa"
 uuid = "98e50ef6-434e-11e9-1051-2b60c6c9e899"
-version = "1.0.54"
+version = "1.0.60"
 
 [[deps.LanguageServer]]
 deps = ["CSTParser", "JSON", "JSONRPC", "JuliaFormatter", "Logging", "Markdown", "Pkg", "PrecompileTools", "REPL", "StaticLint", "SymbolServer", "TestItemDetection", "Tokenize", "URIs", "UUIDs"]
@@ -197,15 +197,15 @@ uuid = "6462fe0b-24de-5631-8697-dd941f90decc"
 
 [[deps.StaticLint]]
 deps = ["CSTParser", "Serialization", "SymbolServer"]
-git-tree-sha1 = "151af6c1d50b549a0032bd037ef59bffc7daa44a"
+git-tree-sha1 = "36732c098f291ee3b867718bb9933e8b67ab4798"
 uuid = "b3cc710f-9c33-5bdb-a03d-a94903873e97"
-version = "8.2.0"
+version = "8.2.2"
 
 [[deps.SymbolServer]]
 deps = ["InteractiveUtils", "LibGit2", "Markdown", "Pkg", "REPL", "SHA", "Serialization", "Sockets", "UUIDs"]
-git-tree-sha1 = "ae89402949ddb5f6ed804030a622df3b384a7c9f"
+git-tree-sha1 = "adcc6a2335e5448adc05939f67d382fb8d17a367"
 uuid = "cf896787-08d5-524d-9de7-132aaa0cb996"
-version = "7.3.0"
+version = "7.4.0"
 
 [[deps.TOML]]
 deps = ["Dates"]
@@ -224,9 +224,9 @@ uuid = "76b0de8b-5c4b-48ef-a724-914b33ca988d"
 version = "0.2.0"
 
 [[deps.Tokenize]]
-git-tree-sha1 = "5b5a892ba7704c0977013bd0f9c30f5d962181e0"
+git-tree-sha1 = "468b4685af4abe0e9fd4d7bf495a6554a6276e75"
 uuid = "0796e94c-ce3b-5d07-9a54-7f471281c624"
-version = "0.5.28"
+version = "0.5.29"
 
 [[deps.URIs]]
 git-tree-sha1 = "67db6cc7b3821e19ebe75791a9dd19c9b1188f2b"

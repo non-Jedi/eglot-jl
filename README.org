@@ -69,3 +69,29 @@ displays:
 #+begin_quote
 [ Info: Received new data from Julia Symbol Server.
 #+end_quote
+
+*** How can I work over TRAMP?
+~eglot~ supports working with projects on remote machines using TRAMP;
+we just need to inform ~eglot~ where to find ~julia~ and ~eglot-jl~ on
+the remote machine. This can be done in the minibuffer by issuing ~C-u
+M-x eglot~, which will ask for all paths. It is however, more
+convenient to set these values using [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Connection-Local-Variables.html][connection local variables]]
+instead, by inserting the following into our ~init.el~:
+#+BEGIN_SRC emacs-lisp
+  (connection-local-set-profile-variables
+   'remote-machine-name-eglot-variables
+   '((eglot-jl-base . "/path/to/eglot-jl/")
+     (eglot-jl-julia-command . "/path/to/julia/bin/julia")
+     (eglot-jl-language-server-project . "/path/to/eglot-jl/")))
+
+  (connection-local-set-profiles
+   '(:application tramp :machine "remote-machine-hostname")
+   'remote-machine-name-eglot-variables)
+#+END_SRC
+For this to work, we must clone `eglot-jl` on the remote machine:
+#+BEGIN_SRC sh
+  $ cd /path/of/your/choosing
+  $ git clone https://github.com/non-Jedi/eglot-jl.git
+#+END_SRC
+=/path/of/your/choosing/eglot-jl= becomes the path we need to set in
+~init.el~, as detailed above.

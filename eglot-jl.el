@@ -2,7 +2,7 @@
 
 ;; Copyright (C) 2019 Adam Beckmeyer
 
-;; Version: 2.4.0
+;; Version: 2.5.0
 ;; Author: Adam Beckmeyer <adam_git@thebeckmeyers.xyz>
 ;; Maintainer: Adam Beckmeyer <adam_git@thebeckmeyers.xyz>
 ;; URL: https://github.com/non-Jedi/eglot-jl

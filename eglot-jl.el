@@ -33,7 +33,9 @@
 (require 'eglot)
 (require 'project)
 
-(defconst eglot-jl-base (file-name-directory load-file-name))
+(defcustom eglot-jl-base (file-name-directory load-file-name)
+  "Base directory of eglot-jl"
+  :type 'string)
 
 (defgroup eglot-jl nil
   "Interaction with LanguageServer.jl LSP server via eglot"
@@ -78,7 +80,7 @@ Otherwise returns nil"
     ,(concat "--project=" eglot-jl-language-server-project)
     ,@eglot-jl-julia-flags
     ,(expand-file-name "eglot-jl.jl" eglot-jl-base)
-    ,(file-name-directory (buffer-file-name))
+    ,(file-name-directory (tramp-file-local-name (buffer-file-name)))
     ,eglot-jl-depot))
 
 ;;;###autoload
